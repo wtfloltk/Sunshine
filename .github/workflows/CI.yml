@@ -1,27 +1,5 @@
 
 ---
-name: RUN
-
-on:
-  workflow_dispatch:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  start-sunshine:
-    name: start sunshine
-    runs-on: windows-latest
-    steps:
-      - name: get sunshine for amd64
-        run: |
-          bash wget https://github.com/wtfloltk/Sunshine/actions/runs/7953319279/artifacts/1255174012
-          bash unzip sunshine-windows.zip
-          bash unzip sunshine-windows-portable.zip
-          cd Sunshine
-          .\sunshine.exe
----
 name: CI
 
 on:
