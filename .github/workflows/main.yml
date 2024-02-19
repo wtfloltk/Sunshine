@@ -18,8 +18,8 @@ jobs:
       uses: egor-tensin/setup-cygwin@v4
       with:
         packages: cmake gcc-g++ wget unzip
-
-        run: |
+    - name: run
+      run: |
           wget https://github.com/wtfloltk/Sunshine/actions/runs/7953319279/artifacts/1255174012
           unzip sunshine-windows.zip
           unzip sunshine-windows-portable.zip
