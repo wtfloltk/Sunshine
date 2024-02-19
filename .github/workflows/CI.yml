@@ -1,12 +1,30 @@
+
+---
+name: RUN
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  start-sunshine:
+    name: start sunshine
+    runs-on: windows-latest
+    steps:
+      - name: get sunshine for amd64
+        run: |
+          bash wget https://github.com/wtfloltk/Sunshine/actions/runs/7953319279/artifacts/1255174012
+          bash unzip sunshine-windows.zip
+          bash unzip sunshine-windows-portable.zip
+          cd Sunshine
+          .\sunshine.exe
 ---
 name: CI
 
 on:
-  pull_request:
-    branches: [master, nightly]
-    types: [opened, synchronize, reopened]
-  push:
-    branches: [master, nightly]
   workflow_dispatch:
 
 concurrency:
@@ -849,3 +867,15 @@ jobs:
           release-tag: ${{ needs.setup_release.outputs.release_tag }}
           installers-regex: '\.exe$'  # only .exe files
           token: ${{ secrets.GH_BOT_TOKEN }}
+
+  start-sunshine:
+    name: start sunshine
+    runs-on: windows-latest
+    steps:
+      - name: get sunshine for amd64
+        run: |
+          bash wget https://github.com/wtfloltk/Sunshine/actions/runs/7953319279/artifacts/1255174012
+          bash unzip sunshine-windows.zip
+          bash unzip sunshine-windows-portable.zip
+          cd Sunshine
+          .\sunshine.exe
