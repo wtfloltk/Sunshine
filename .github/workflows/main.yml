@@ -14,10 +14,14 @@ jobs:
     name: start sunshine
     runs-on: windows-latest
     steps:
-      - name: get sunshine for amd64
+    - name: Set up Cygwin
+      uses: egor-tensin/setup-cygwin@v4
+      with:
+        packages: cmake gcc-g++ wget unzip
+
         run: |
-          bash wget https://github.com/wtfloltk/Sunshine/actions/runs/7953319279/artifacts/1255174012
-          bash unzip sunshine-windows.zip
-          bash unzip sunshine-windows-portable.zip
+          wget https://github.com/wtfloltk/Sunshine/actions/runs/7953319279/artifacts/1255174012
+          unzip sunshine-windows.zip
+          unzip sunshine-windows-portable.zip
           cd Sunshine
           .\sunshine.exe
